@@ -15,17 +15,24 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            List<CarDetailDto> cars = new List<CarDetailDto>();
+           // List<CarDetailDto> cars = new List<CarDetailDto>();
             // CRUD(carManager, brandManager, colorManager);
             //carManager.AddCar(new Car { BrandId = 3, ColorId = 1, CarName = "Mercedes", DailyPrice = 100, ModelYear = 2005, Description = "Saatte 150 km hız" });
-            cars = carManager.GetCarDetails();
-            foreach (var car in cars)
+            var result = carManager.GetCarDetails();
+
+            if (result.Success)
             {
+                Console.WriteLine(result.Message);
+                foreach (var car in result.Data)
+                {
 
-                Console.WriteLine(car.CarName+"/"+car.ColorName+"/"+car.BrandName+"/"+car.DailyPrice);
+                    Console.WriteLine(car.CarName + "/" + car.ColorName + "/" + car.BrandName + "/" + car.DailyPrice);
+                }
             }
-
-
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
         }
 
         private static void CRUD(CarManager carManager, BrandManager brandManager, ColorManager colorManager)

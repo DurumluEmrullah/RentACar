@@ -27,10 +27,15 @@ namespace Business.Concrete
         {
             
             var carState = _rentalDal.Get(c=>c.CarId==rental.CarId);
-            if (carState.ReturnDate != null && DateTime.Compare( carState.ReturnDate,DateTime.Now)>0)
+            if (carState.ReturnDate != null )
             {
-                _rentalDal.Add(rental);
-                return new SuccessResult();
+                if (DateTime.Compare(carState.ReturnDate, DateTime.Now) > 0)
+                {
+                    rental.RentDate = DateTime.Now;
+                    _rentalDal.Add(rental);
+                    return new SuccessResult();
+                }
+
             }
 
             return new ErrorResult();

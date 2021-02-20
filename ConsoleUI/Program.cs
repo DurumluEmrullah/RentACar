@@ -14,7 +14,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-
+            
             string menu = "1-Araba işlemleri \n" +
                           "2-Marka İşlemleri\n" +
                           "3-Renk işlemleri\n" +
@@ -50,6 +50,7 @@ namespace ConsoleUI
                                     "2 - Kullanıcı ekle\n" +
                                     "3 - Kullanıcı Güncelle\n" +
                                     "4- Kullanıcı sil\n";
+
             while (true)
             {
                 Console.WriteLine(menu);

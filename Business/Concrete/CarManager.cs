@@ -19,7 +19,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public IResult AddCar(Car car)
+        public IResult Add(Car car)
         {
             if (car.CarName.Length >= 2 && car.DailyPrice > 0)
             {
@@ -29,7 +29,7 @@ namespace Business.Concrete
             return new ErrorResult();
         }
 
-        public IResult DeleteCar(Car car)
+        public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
@@ -55,7 +55,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>( _carDal.GetAll(c => c.ColorId == colorId));
         }
 
-        public IResult UpdateCar(Car car)
+        public IResult Update(Car car)
         {
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);

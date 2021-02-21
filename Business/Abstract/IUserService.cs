@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Business;
 using Core.Utilities.Results.Abstract;
 using Entities.Concrete;
 
 namespace Business.Abstract
 {
-    public interface IUserService
+    public interface IUserService: IBaseService<User>
     {
-        IDataResult<List<User>> GetAll();
-        IResult Add(User user);
-        IResult Delete(User user);
-        IResult Update(User user);
+   
     }
 }

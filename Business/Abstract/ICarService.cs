@@ -4,18 +4,17 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Business;
 
 namespace Business.Abstract
 {
-    public interface ICarService
+    public interface ICarService: IBaseService<Car>
     {
-        IDataResult<List<Car>> GetAll();
+  
         IDataResult<List<Car>> GetCarsByBrandId(int brandId);
         IDataResult<List<Car>> GetCarsByColorId(int colorId);
         IDataResult<List<CarDetailDto>> GetCarDetails();
-        IResult AddCar(Car car);
-        IResult DeleteCar(Car car);
-        IResult UpdateCar(Car car);
+
 
     }
 }

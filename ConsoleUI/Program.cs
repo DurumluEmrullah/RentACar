@@ -14,87 +14,90 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            
-            string menu = "1-Araba işlemleri \n" +
-                          "2-Marka İşlemleri\n" +
-                          "3-Renk işlemleri\n" +
-                          "4-Müşteri işlemleri\n" +
-                          "5-Kiralama işlemleri\n" +
-                          "6- Kullanıcı işlemleri\n" +
-                          "Cikmak için : 0";
-            string carOperations = "1 - Arabaları göster\n" +
-                                   "2 - Markalara göre tüm arabaları göster\n" +
-                                   "3 - Renkelerine göre tüm arabaları göster\n" +
-                                   "4 - Arabaların detaylarını göster\n" +
-                                   "5 - Yeni araba ekle\n" +
-                                   "6 - Araba sil\n" +
-                                   "7 - Araba Güncelle\n";
-            string brandOperations = "1 - Markaları göster\n" +
-                                     "2 - Yeni Marka Ekle\n" +
-                                     "3 - Marka sil\n" +
-                                     "4 - Marka Güncelle\n";
-            string colorOperations = "1 - Renkleri göster\n" +
-                                     "2 - Yeni renk Ekle\n" +
-                                     "3 - Rengi sil\n" +
-                                     "4 - Renk Güncelle\n";
-            string customerOperations = "1 - Müşterileri göster\n" +
-                                        "2 - Müşteri Detaylarını göster\n" +
-                                        "3 - Yeni Müşteri Ekle\n" +
-                                        "4 - Müşteri sil\n" +
-                                        "5 - Müşteri Güncelle\n";
-            string rentalOperations = "1 - Araçların durumunu göster\n" +
-                                      "2 - Araç kirala\n" +
-                                      "3 - Kiralamayı sil\n" +
-                                      "4 - Kiralamayı güncelle\n";
-            string userOperations = "1 - Kullanıcıları listele\n" +
-                                    "2 - Kullanıcı ekle\n" +
-                                    "3 - Kullanıcı Güncelle\n" +
-                                    "4- Kullanıcı sil\n";
 
-            while (true)
-            {
-                Console.WriteLine(menu);
-                int subChoose, choose = int.Parse(Console.ReadLine());
-                switch (choose)
-                {
-                    case 1:
-                        Console.WriteLine(carOperations);
-                        subChoose = int.Parse(Console.ReadLine());
-                        OperationsOfCar(subChoose);
-                        Console.ReadLine();
+            //string menu = "1-Araba işlemleri \n" +
+            //              "2-Marka İşlemleri\n" +
+            //              "3-Renk işlemleri\n" +
+            //              "4-Müşteri işlemleri\n" +
+            //              "5-Kiralama işlemleri\n" +
+            //              "6- Kullanıcı işlemleri\n" +
+            //              "Cikmak için : 0";
+            //string carOperations = "1 - Arabaları göster\n" +
+            //                       "2 - Markalara göre tüm arabaları göster\n" +
+            //                       "3 - Renkelerine göre tüm arabaları göster\n" +
+            //                       "4 - Arabaların detaylarını göster\n" +
+            //                       "5 - Yeni araba ekle\n" +
+            //                       "6 - Araba sil\n" +
+            //                       "7 - Araba Güncelle\n";
+            //string brandOperations = "1 - Markaları göster\n" +
+            //                         "2 - Yeni Marka Ekle\n" +
+            //                         "3 - Marka sil\n" +
+            //                         "4 - Marka Güncelle\n";
+            //string colorOperations = "1 - Renkleri göster\n" +
+            //                         "2 - Yeni renk Ekle\n" +
+            //                         "3 - Rengi sil\n" +
+            //                         "4 - Renk Güncelle\n";
+            //string customerOperations = "1 - Müşterileri göster\n" +
+            //                            "2 - Müşteri Detaylarını göster\n" +
+            //                            "3 - Yeni Müşteri Ekle\n" +
+            //                            "4 - Müşteri sil\n" +
+            //                            "5 - Müşteri Güncelle\n";
+            //string rentalOperations = "1 - Araçların durumunu göster\n" +
+            //                          "2 - Araç kirala\n" +
+            //                          "3 - Kiralamayı sil\n" +
+            //                          "4 - Kiralamayı güncelle\n";
+            //string userOperations = "1 - Kullanıcıları listele\n" +
+            //                        "2 - Kullanıcı ekle\n" +
+            //                        "3 - Kullanıcı Güncelle\n" +
+            //                        "4- Kullanıcı sil\n";
 
-                        break;
-                    case 2:
-                        Console.WriteLine(brandOperations);
-                        subChoose = int.Parse(Console.ReadLine());
-                        OperationsOfBrand(subChoose);
-                        Console.ReadLine();
-                        break;
-                    case 3:
-                        Console.WriteLine(colorOperations);
-                        subChoose = int.Parse(Console.ReadLine());
-                        OperationsOfColor(subChoose);
-                        Console.ReadLine();
-                        break;
-                    case 4:
-                        Console.WriteLine(customerOperations);
-                        subChoose = int.Parse(Console.ReadLine());
-                        break;
-                    case 5:
-                        Console.WriteLine(rentalOperations);
-                        subChoose = int.Parse(Console.ReadLine());
-                        break;
-                    case 6:
-                        Console.WriteLine(userOperations);
-                        subChoose = int.Parse(Console.ReadLine());
-                        break;
-                    case 0:
-                        return;
-                    default:
-                        Console.WriteLine("Geçersiz işlemççç");
-                        break;
-                }
-            }
+            //UserManager userManager = new UserManager(new EfUserDal());
+            //userManager.Add(new User() {Id=1,FirstName = "Emrullah", LastName = "Durumlu", Password = "123456"});
+
+            //while (true)
+            //{
+            //    Console.WriteLine(menu);
+            //    int subChoose, choose = int.Parse(Console.ReadLine());
+            //    switch (choose)
+            //    {
+            //        case 1:
+            //            Console.WriteLine(carOperations);
+            //            subChoose = int.Parse(Console.ReadLine());
+            //            OperationsOfCar(subChoose);
+            //            Console.ReadLine();
+
+            //            break;
+            //        case 2:
+            //            Console.WriteLine(brandOperations);
+            //            subChoose = int.Parse(Console.ReadLine());
+            //            OperationsOfBrand(subChoose);
+            //            Console.ReadLine();
+            //            break;
+            //        case 3:
+            //            Console.WriteLine(colorOperations);
+            //            subChoose = int.Parse(Console.ReadLine());
+            //            OperationsOfColor(subChoose);
+            //            Console.ReadLine();
+            //            break;
+            //        case 4:
+            //            Console.WriteLine(customerOperations);
+            //            subChoose = int.Parse(Console.ReadLine());
+            //            break;
+            //        case 5:
+            //            Console.WriteLine(rentalOperations);
+            //            subChoose = int.Parse(Console.ReadLine());
+            //            break;
+            //        case 6:
+            //            Console.WriteLine(userOperations);
+            //            subChoose = int.Parse(Console.ReadLine());
+            //            break;
+            //        case 0:
+            //            return;
+            //        default:
+            //            Console.WriteLine("Geçersiz işlemççç");
+            //            break;
+            //    }
+            //}
 
 
 
@@ -115,13 +118,13 @@ namespace ConsoleUI
                     }
                     break;
                 case 2:
-                    Color addedColor= new Color();
+                    Color addedColor = new Color();
                     Console.Write("Renk Adini giriniz : ");
                     addedColor.ColorName = Console.ReadLine();
-                    colorManager.AddColor(addedColor);
+                    colorManager.Add(addedColor);
                     break;
                 case 3:
-                    Color deletedColor= new Color();
+                    Color deletedColor = new Color();
                     colors = colorManager.GetAll().Data;
                     foreach (var color in colors)
                     {
@@ -129,7 +132,7 @@ namespace ConsoleUI
                     }
                     Console.Write("Silinecek Renk Id : ");
                     deletedColor.ColorId = int.Parse(Console.ReadLine());
-                    colorManager.DeleteColor(deletedColor);
+                    colorManager.Delete(deletedColor);
                     break;
                 case 4:
                     Color updatedColor = new Color();
@@ -142,7 +145,7 @@ namespace ConsoleUI
                     updatedColor.ColorId = int.Parse(Console.ReadLine());
                     Console.Write("Yeni adını giriniz : ");
                     updatedColor.ColorName = Console.ReadLine();
-                    colorManager.UpdateColor(updatedColor);
+                    colorManager.Update(updatedColor);
                     break;
                 default:
                     Console.WriteLine("Hatalı seçim !!");
@@ -160,14 +163,14 @@ namespace ConsoleUI
                     brands = brandManager.GetAll().Data;
                     foreach (var brand in brands)
                     {
-                        Console.WriteLine("Marka Id : "+brand.BrandId + " Marka Adı : "+brand.BrandName);
+                        Console.WriteLine("Marka Id : " + brand.BrandId + " Marka Adı : " + brand.BrandName);
                     }
                     break;
                 case 2:
                     Brand addedBrand = new Brand();
                     Console.Write("Marka Adini giriniz : ");
                     addedBrand.BrandName = Console.ReadLine();
-                    brandManager.AddBrand(addedBrand);
+                    brandManager.Add(addedBrand);
                     break;
                 case 3:
                     Brand deletedBrand = new Brand();
@@ -178,7 +181,7 @@ namespace ConsoleUI
                     }
                     Console.Write("Silinecek Markanın Id : ");
                     deletedBrand.BrandId = int.Parse(Console.ReadLine());
-                    brandManager.DeleteBrand(deletedBrand);
+                    brandManager.Delete(deletedBrand);
                     break;
                 case 4:
                     Brand updatedBrand = new Brand();
@@ -191,7 +194,7 @@ namespace ConsoleUI
                     updatedBrand.BrandId = int.Parse(Console.ReadLine());
                     Console.Write("Yeni adını giriniz : ");
                     updatedBrand.BrandName = Console.ReadLine();
-                    brandManager.UpdateBrand(updatedBrand);
+                    brandManager.Update(updatedBrand);
                     break;
                 default:
                     Console.WriteLine("Hatalı seçim !!");
@@ -257,7 +260,7 @@ namespace ConsoleUI
                     Console.Write("Arac aciklamasini giriniz : ");
                     addedCar.Description = Console.ReadLine();
 
-                    carManager.AddCar(addedCar);
+                    carManager.Add(addedCar);
                     break;
                 case 6:
                     Car deletedCar = new Car();
@@ -269,7 +272,7 @@ namespace ConsoleUI
                     }
                     Console.Write("Silinecek aracın ıd sini giriniz : ");
                     deletedCar.Id = int.Parse(Console.ReadLine());
-                    carManager.DeleteCar(deletedCar);
+                    carManager.Delete(deletedCar);
                     break;
                 case 7:
                     Car updatedCar = new Car();
@@ -294,7 +297,7 @@ namespace ConsoleUI
                     Console.Write("Arac aciklamasini giriniz : ");
                     updatedCar.Description = Console.ReadLine();
 
-                    carManager.UpdateCar(updatedCar);
+                    carManager.Update(updatedCar);
                     break;
                 default:
                     Console.WriteLine("Hatalı işlem ");

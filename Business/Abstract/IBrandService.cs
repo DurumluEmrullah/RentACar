@@ -3,15 +3,12 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Business;
 
 namespace Business.Abstract
 {
-    public interface IBrandService
+    public interface IBrandService:IBaseService<Brand>
     {
-        IDataResult<List<Brand>> GetAll();
         IDataResult<Brand> GetById(int id);
-        IResult AddBrand(Brand brand);
-        IResult DeleteBrand(Brand brand);
-        IResult UpdateBrand(Brand brand);
     }
 }

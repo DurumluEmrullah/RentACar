@@ -5,7 +5,7 @@ using Core.Entities;
 
 namespace Entities.Concrete
 {
-    public class Rental:User,IEntity
+    public class Rental:IEntity
     {
         public int Id { get; set; }
         public int CarId { get; set; }

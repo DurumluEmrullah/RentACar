@@ -17,13 +17,13 @@ namespace Business.Concrete
         {
             _colorDal = colorDal;
         }
-        public IResult AddColor(Color color)
+        public IResult Add(Color color)
         {
             _colorDal.Add(color);
             return new SuccessResult(Messages.ColorAdded);
         }
 
-        public IResult DeleteColor(Color color)
+        public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
             return new SuccessResult(Messages.ColorDeleted);
@@ -39,7 +39,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == id),Messages.ColorFinded);
         }
 
-        public IResult UpdateColor(Color color)
+        public IResult Update(Color color)
         {
             _colorDal.Update(color);
             return new SuccessResult(Messages.ColorUpdated);

@@ -5,31 +5,22 @@ using System.Threading.Tasks;
 using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using WepAPI.Controllers.Base;
 
 namespace WepAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarsController : ControllerBase
+    public class CarsController : BaseAPIController<ICarService,Car>
     {
         private ICarService _carService;
 
-        public CarsController(ICarService carService)
+        public CarsController(ICarService carService):base(carService)
         {
             _carService = carService;
         }
 
-        [HttpGet("getall")]
-        public IActionResult GetAll()
-        {
-            var result = _carService.GetAll();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.Message);
-        }
+ 
 
         [HttpGet("getcarsbybrandid")]
         public IActionResult GetCarsByBrandId(int id)
@@ -60,35 +51,7 @@ namespace WepAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("addcar")]
-        public IActionResult AddCar(Car car)
-        {
-            var result = _carService.Add(car);
-            if (result.Success)
-                return Ok(result);
 
-            return BadRequest(result.Message);
-        }
-
-        [HttpPost("deletecar")]
-        public IActionResult DeleteCar(Car car)
-        {
-            var result = _carService.Delete(car);
-            if (result.Success)
-                return Ok();
-
-            return BadRequest(result.Message);
-        }
-
-        [HttpPost("updatecar")]
-        public IActionResult UpdateCar(Car car)
-        {
-            var result = _carService.Update(car);
-            if (result.Success)
-                return Ok();
-
-            return BadRequest(result.Message);
-        }
 
     }
 }

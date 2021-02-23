@@ -14,7 +14,8 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-
+            Console.BackgroundColor = System.ConsoleColor.Blue;
+            
             //string menu = "1-Araba işlemleri \n" +
             //              "2-Marka İşlemleri\n" +
             //              "3-Renk işlemleri\n" +

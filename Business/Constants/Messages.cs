@@ -26,5 +26,7 @@ namespace Business.Constants
         public static string ColorListed = "Renkler Listelendi";
         public static string ColorFinded = "Renk Bulundu";
 
+        public static string MaxCarImage = "Bir Arabanın en fazla5 tane resmi olabilir ..";
+
     }
 }

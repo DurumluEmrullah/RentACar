@@ -31,11 +31,12 @@ namespace Business.Concrete
         public IResult Add(CarImage entity)
         {
             entity.Date=DateTime.Now;
-            IResult result = BusinessRules.Run(CheckCarImageCount(entity.CarId));
+            IResult result = BusinessRules.Run(CheckCarImageCount(entity.CarId),RenameIMagePath(entity));
             if (result != null)
             {
                 return result;
             }
+
 
             _carImageDal.Add(entity);
             return new SuccessResult();
@@ -59,9 +60,9 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IDataResult<CarImage> GetCarImage(int carId)
+        public IDataResult<List<CarImage>> GetCarImage(int carId)
         {
-           return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.CarId == carId));
+           return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == carId));
         }
 
 
@@ -72,6 +73,18 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.MaxCarImage);
             }
+
+            return new SuccessResult();
+        }
+        // referans tip olduğu için direk carImage nesnesini gönderdim 
+        private IResult RenameIMagePath(CarImage carImage)
+        {
+
+            Random random = new Random();
+            carImage.ImagePath = carImage.ImagePath.Replace(" ", "-");
+            carImage.ImagePath = carImage.ImagePath.Substring(carImage.ImagePath.Length - carImage.ImagePath.Length / 2) + "" +
+                               random.Next();
+
 
             return new SuccessResult();
         }

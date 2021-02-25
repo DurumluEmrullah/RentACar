@@ -21,9 +21,9 @@ namespace WepAPI.Controllers
         }
 
         [HttpGet("getbycarid")]
-        public IActionResult GetByCarId(int carId)
+        public IActionResult GetByCarId(int id)
         {
-            var result = _carImageService.GetCarImage(carId);
+            var result = _carImageService.GetCarImage(id);
             if (result.Success)
                 return Ok(result);
 

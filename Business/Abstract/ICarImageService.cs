@@ -9,6 +9,6 @@ namespace Business.Abstract
 {
     public interface ICarImageService:IBaseService<CarImage>
     {
-        IDataResult<CarImage> GetCarImage(int carId);
+        IDataResult<List<CarImage>> GetCarImage(int carId);
     }
 }

@@ -38,7 +38,7 @@ namespace WepAPI.Controllers.Base
             if (result.Success)
                 return Ok(result);
 
-            return BadRequest("result");
+            return BadRequest(result.Message);
         }
 
         [HttpPost("delete")]

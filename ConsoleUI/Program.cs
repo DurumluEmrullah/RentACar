@@ -5,6 +5,8 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Mime;
 using System.Runtime.CompilerServices;
 using Microsoft.VisualBasic.CompilerServices;
 
@@ -12,10 +14,34 @@ namespace ConsoleUI
 {
     class Program
     {
+        protected readonly string imageDirectory = @"deneme\";
         static void Main(string[] args)
         {
-            Console.BackgroundColor = System.ConsoleColor.Blue;
+            string dosyaYolu = @"C:\Users\EmrullahD\Desktop\kitaplar\1613592883309.jfif";// kullanıcıdan gelecek
+            string imageDirectory = @"C:\Users\EmrullahD\source\repos\ReCapProject\ConsoleUI\deneme\";
+           // Console.BackgroundColor = System.ConsoleColor.Blue;
+     
+          //  string filePath = Path.Combine(Directory.GetCurrentDirectory(), imageDirectory,dosyaYolu);
+          //  Console.WriteLine(System.IO.Directory.Exists(dosyaYolu));
+          //  Console.WriteLine(System.IO.Directory.Exists(imageDirectory));
+            //
+            string destinationFilePath;
+            string dosyaAdi = System.IO.Path.GetFileName(dosyaYolu);
+            string fileName = Guid.NewGuid().ToString() + dosyaAdi.Substring(dosyaAdi.LastIndexOf("."));
+            //   Console.WriteLine("File path : "+filePath);
             
+            destinationFilePath = System.IO.Path.Combine(imageDirectory, dosyaAdi);
+          
+            System.IO.File.Copy(dosyaYolu,destinationFilePath,true);
+            File.Move(imageDirectory+dosyaAdi,imageDirectory+fileName);
+
+
+
+
+
+            //  File.Copy(filePath,imageDirectory);
+
+           // Console.WriteLine(filePath);
             //string menu = "1-Araba işlemleri \n" +
             //              "2-Marka İşlemleri\n" +
             //              "3-Renk işlemleri\n" +

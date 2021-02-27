@@ -30,6 +30,8 @@ namespace WepAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerDocument();
+
             //services.AddSingleton<ICarService, CarManager>();
             //services.AddSingleton<ICarDal, EfCarDal>();
             //services.AddSingleton<IBrandService, BrandManager>();
@@ -55,7 +57,8 @@ namespace WepAPI
             }
 
             app.UseHttpsRedirection();
-
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
             app.UseRouting();
 
             app.UseAuthorization();

@@ -31,7 +31,7 @@ namespace Business.Concrete
         public IResult Add(CarImage entity)
         {
             entity.Date=DateTime.Now;
-            IResult result = BusinessRules.Run(CheckCarImageCount(entity.CarId),RenameIMagePath(entity));
+            IResult result = BusinessRules.Run(CheckCarImageCount(entity.CarId), SaveIMageToDirectory(entity));
             if (result != null)
             {
                 return result;
@@ -41,9 +41,14 @@ namespace Business.Concrete
             _carImageDal.Add(entity);
             return new SuccessResult();
         }
-
+        [ValidationAspect(typeof(CarImageValidation))]
         public IResult Delete(CarImage entity)
         {
+            IResult result = BusinessRules.Run(DeleteImageToDirectory(entity));
+            if (result != null)
+            {
+                return result;
+            }
             _carImageDal.Delete(entity);
             return new SuccessResult();
         }
@@ -51,7 +56,8 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarImageValidation))]
         public IResult Update(CarImage entity)
         {
-            IResult result = BusinessRules.Run(CheckCarImageCount(entity.CarId));
+            entity.Date=DateTime.Now;
+            IResult result = BusinessRules.Run(CheckCarImageCount(entity.CarId),SaveIMageToDirectory(entity));
             if (result != null)
             {
                 return result;
@@ -69,22 +75,30 @@ namespace Business.Concrete
         private IResult CheckCarImageCount(int carId)
         {
             var result = _carImageDal.GetAll(c => c.CarId == carId);
-            if (result.Count > 5)
+            if (result.Count >= 5)
             {
                 return new ErrorResult(Messages.MaxCarImage);
             }
 
             return new SuccessResult();
         }
-        // referans tip olduğu için direk carImage nesnesini gönderdim 
-        private IResult RenameIMagePath(CarImage carImage)
+        
+        private IResult SaveIMageToDirectory(CarImage carImage)
         {
 
-            Random random = new Random();
-            carImage.ImagePath = carImage.ImagePath.Replace(" ", "-");
-            carImage.ImagePath = carImage.ImagePath.Substring(carImage.ImagePath.Length - carImage.ImagePath.Length / 2) + "" +
-                               random.Next();
+            string fileName = System.IO.Path.GetFileName(carImage.ImagePath);
+            string newFileName = Guid.NewGuid().ToString() + fileName.Substring(fileName.LastIndexOf("."));
+            string destinationFilePath = System.IO.Path.Combine(Directories.ImageDirectoryPath, fileName);
+            System.IO.File.Copy(carImage.ImagePath, destinationFilePath, true);
+            System.IO.File.Move(Directories.ImageDirectoryPath + fileName, Directories.ImageDirectoryPath + newFileName);
+            carImage.ImagePath = Directories.ImageDirectoryPath + newFileName;
 
+            return new SuccessResult();
+        }
+
+        private IResult DeleteImageToDirectory(CarImage carImage)
+        {
+            System.IO.File.Delete(carImage.ImagePath);
 
             return new SuccessResult();
         }

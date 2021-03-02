@@ -13,7 +13,6 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(u => u.FirstName).Must(IsUpperCase).WithMessage("İsim büyük harfle başlamalı ");
             RuleFor(u=>u.Email).Must(IsTrueFormat).WithMessage("E posta @gmail.com ile bitmeli");
             RuleFor(u => u.LastName).MinimumLength(2);
-            RuleFor(u => u.Password).MinimumLength(8);
         }
 
         private bool IsTrueFormat(string arg)

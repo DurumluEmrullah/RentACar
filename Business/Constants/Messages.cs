@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Entities.Concrete;
 
 namespace Business.Constants
 {
@@ -28,5 +29,13 @@ namespace Business.Constants
 
         public static string MaxCarImage = "Bir Arabanın en fazla5 tane resmi olabilir ..";
 
+        public static string ClaimsListed = "Yetkiler listelendi";
+        public static string UserAdded = "Kullanıcı eklendi";
+        public static string AuthorizationDenied = "Yetkiniz Yok";
+        public static string UserAlreadyExists = "Bu mail adresi sistemimizde zaten kayıtlı";
+        public static string UserNotFind = "Kullanıcı Bulunamadı";
+        public static string PasswordError = "Şifre Hatalı ";
+        public static string SuccessLogin = "Giriş başarılı";
+        public static string AccessTokenCreated = "Token oluşturuldu ";
     }
 }

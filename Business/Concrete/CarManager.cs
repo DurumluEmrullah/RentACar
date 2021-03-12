@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using Business.BusinessAspect.Autofac;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 
@@ -22,8 +23,9 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        [SecuredOperation("Admin")]
-        [ValidationAspect(typeof(CarValidator))]
+       // [SecuredOperation("Admin")]
+        
+       [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
@@ -36,7 +38,7 @@ namespace Business.Concrete
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
-
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarListed);

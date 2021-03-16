@@ -20,5 +20,18 @@ namespace WepAPI.Controllers
         {
             _rentalService = rentalService;
         }
+
+        [HttpGet("getrentaldetails")]
+        public IActionResult GetRentalDetails()
+        {
+            var result = _rentalService.GetDetailRentals();
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.Message);
+        }
     }
 }

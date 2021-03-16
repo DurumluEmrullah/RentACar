@@ -8,6 +8,7 @@ using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -29,17 +30,19 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            
-            var carState = _rentalDal.Get(c=>c.CarId==rental.CarId);
-            if (carState.ReturnDate != null )
-            {
-                if (DateTime.Compare(carState.ReturnDate, DateTime.Now) > 0)
-                {
-                    rental.RentDate = DateTime.Now;
-                    _rentalDal.Add(rental);
-                    return new SuccessResult();
-                }
 
+            var carState = _rentalDal.Get(c => c.CarId == rental.CarId);
+            if (carState == null)
+            {
+                rental.ReturnDate=DateTime.Now.AddDays(10);
+                    if (DateTime.Compare(rental.ReturnDate, DateTime.Now) > 0)
+                    {
+                        rental.RentDate = DateTime.Now;
+                        _rentalDal.Add(rental);
+                        return new SuccessResult();
+                    }
+
+             
             }
 
             return new ErrorResult();
@@ -57,6 +60,11 @@ namespace Business.Concrete
         {
             _rentalDal.Update(rental);
             return new SuccessResult();
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetDetailRentals()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
         }
     }
 }

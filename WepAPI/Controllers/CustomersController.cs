@@ -21,6 +21,7 @@ namespace WepAPI.Controllers
             _customerService = customerService;
         }
 
+        [HttpGet("getcustomerdetail")]
         public IActionResult GetAllCustomerDetail()
         {
             var result = _customerService.GetAllCustomerDetail();

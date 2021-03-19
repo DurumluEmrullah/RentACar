@@ -91,7 +91,7 @@ namespace Business.Concrete
             string destinationFilePath = System.IO.Path.Combine(Directories.ImageDirectoryPath, fileName);
             System.IO.File.Copy(carImage.ImagePath, destinationFilePath, true);
             System.IO.File.Move(Directories.ImageDirectoryPath + fileName, Directories.ImageDirectoryPath + newFileName);
-            carImage.ImagePath = Directories.ImageDirectoryPath + newFileName;
+            carImage.ImagePath = newFileName;
 
             return new SuccessResult();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
@@ -34,8 +35,8 @@ namespace Business.Concrete
             var carState = _rentalDal.Get(c => c.CarId == rental.CarId);
             if (carState == null)
             {
-                rental.ReturnDate=DateTime.Now.AddDays(10);
-                    if (DateTime.Compare(rental.ReturnDate, DateTime.Now) > 0)
+               
+                    if (DateTime.Compare(rental.ReturnDate, rental.RentDate) > 0)
                     {
                         rental.RentDate = DateTime.Now;
                         _rentalDal.Add(rental);
@@ -45,7 +46,7 @@ namespace Business.Concrete
              
             }
 
-            return new ErrorResult();
+            return new ErrorResult(Messages.AlreadyRented);
 
         }
 

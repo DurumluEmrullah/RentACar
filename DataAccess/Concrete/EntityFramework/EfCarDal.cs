@@ -71,5 +71,20 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.First();
             }
         }
+
+        public List<CarDetailDto> GetCarsByFilter(int colorId, int brandId)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                var result = from p in context.Cars
+                    join c in context.Colors
+                        on p.ColorId equals c.ColorId
+                    join b in context.Brands
+                        on p.BrandId equals b.BrandId
+                    where p.ColorId == colorId && p.BrandId==brandId
+                    select new CarDetailDto { Id = p.Id, CarName = p.CarName, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, ModelYear = p.ModelYear, Description = p.Description };
+                return result.ToList();
+            }
+        }
     }
 }

@@ -25,7 +25,15 @@ namespace WepAPI.Controllers
         {
             var result = _carImageService.GetCarImage(id);
             if (result.Success)
+            {
+                if (result.Data.Count < 1)
+                {
+                    result.Data.Add(new CarImage(){Id=1,ImagePath = "21bdbda5-9024-44d2-84be-dcbf07bb0718.jpg" });
+                }
+
                 return Ok(result);
+            }
+                
 
             return BadRequest(result.Message);
 

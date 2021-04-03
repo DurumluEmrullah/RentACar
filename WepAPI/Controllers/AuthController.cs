@@ -32,7 +32,7 @@ namespace WepAPI.Controllers
             var result = _authService.CreateAccessToken(userToLogin.Data);
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
 
             return BadRequest(result.Message);
@@ -53,10 +53,42 @@ namespace WepAPI.Controllers
 
             if (accessToken.Success)
             {
-                return Ok(accessToken.Data);
+                return Ok(accessToken);
             }
 
             return BadRequest(accessToken.Message);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update(UserForUpdateDto userForUpdateDto)
+        {
+            // defensive :)
+            var userIsExists = _authService.UserExists(userForUpdateDto.Email);
+            if (userIsExists.Success)
+            {
+                return BadRequest(userIsExists.Message);
+            }
+
+            var updateResult = _authService.Update(userForUpdateDto);
+           
+
+            if (updateResult.Success)
+            {
+                return Ok(updateResult);
+            }
+
+            return BadRequest(updateResult.Message);
+        }
+
+        [HttpGet("getuserbyemail")]
+        public IActionResult  GetUserByEmail(string email)
+        {
+            var result = _authService.GetUserByEmail(email);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
         }
     }
 }

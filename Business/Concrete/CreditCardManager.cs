@@ -42,7 +42,9 @@ namespace Business.Concrete
 
         public IResult Update(CreditCard entity)
         {
-            _creditCardDal.Update(entity);
+            var updatedCreditCard = _creditCardDal.Get(c => c.CardNumber == entity.CardNumber);
+            updatedCreditCard.CustomerId = entity.CustomerId;
+            _creditCardDal.Update(updatedCreditCard);
             return new SuccessResult();
         }
         
@@ -63,6 +65,12 @@ namespace Business.Concrete
         {
             _creditCardDal.Refund(buyDto);
             return new SuccessResult();
+        }
+
+        public IDataResult<List<CreditCard>> GetCreditCardsByCustomerId(int id)
+        {
+
+           return  new SuccessDataResult<List<CreditCard>>( _creditCardDal.GetAll(c => c.CustomerId == id));
         }
     }
 }

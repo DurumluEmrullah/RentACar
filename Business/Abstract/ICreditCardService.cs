@@ -12,5 +12,6 @@ namespace Business.Abstract
     {
         IResult Buy(BuyDto buyDto);
         IResult Refund(BuyDto buyDto);
+        IDataResult<List<CreditCard>>GetCreditCardsByCustomerId(int id);
     }
 }

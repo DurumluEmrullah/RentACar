@@ -44,6 +44,17 @@ namespace Business.Concrete
 
         }
 
+        public IDataResult<UserDto> GetUserByEmail(string email)
+        {
+            var result =_userService.GetUserByEmail(email);
+            if (result.Success)
+            {
+                return new SuccessDataResult<UserDto>(result.Data);
+            }
+
+            return new ErrorDataResult<UserDto>(result.Message);
+        }
+
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
             var userToCheck = _userService.GetByEmail(userForLoginDto.Email);
@@ -61,6 +72,7 @@ namespace Business.Concrete
 
             return new SuccessDataResult<User>(userToCheck.Data, Messages.SuccessLogin);
         }
+
 
         public IResult UserExists(string email)
         {
@@ -80,6 +92,37 @@ namespace Business.Concrete
             var accessToken = _toknHelper.CreateToken(user, claims.Data);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
 
+        }
+
+        public IDataResult<User> Update(UserForUpdateDto userForUpdateDto)
+        {
+            var userToCheck = _userService.GetByEmail(userForUpdateDto.Email);
+            if (userToCheck == null)
+            {
+                return new ErrorDataResult<User>(Messages.UserNotFind);
+            }
+
+            if (!HashingHelper.VerifyPasswordHash(userForUpdateDto.LastPassword, userToCheck.Data.PasswordHash,
+                userToCheck.Data.PasswordSalt))
+            {
+                return new ErrorDataResult<User>(Messages.PasswordError);
+
+            }
+
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash(userForUpdateDto.NewPassword, out passwordHash, out passwordSalt);
+            var user = new User()
+            {
+                Id= userForUpdateDto.Id,
+                FirstName = userForUpdateDto.FirstName,
+                LastName = userForUpdateDto.LastName,
+                Email = userForUpdateDto.Email,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Status = true
+            };
+            _userService.Update(user);
+            return new SuccessDataResult<User>(Messages.UserUpdated);
         }
     }
 }

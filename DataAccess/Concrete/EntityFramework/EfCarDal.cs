@@ -22,7 +22,7 @@ namespace DataAccess.Concrete.EntityFramework
                              on p.ColorId equals c.ColorId
                              join b in context.Brands
                              on p.BrandId equals b.BrandId
-                             select new CarDetailDto {Id = p.Id,CarName = p.CarName, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, ModelYear = p.ModelYear,Description = p.Description};
+                             select new CarDetailDto {Id = p.Id,CarName = p.CarName, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, ModelYear = p.ModelYear,Description = p.Description, Findex = p.Findex };
                 return result.ToList();
             }
         }
@@ -37,7 +37,7 @@ namespace DataAccess.Concrete.EntityFramework
                     join b in context.Brands
                         on p.BrandId equals b.BrandId
                         where p.BrandId==id
-                    select new CarDetailDto { Id = p.Id, CarName = p.CarName, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, ModelYear = p.ModelYear, Description = p.Description };
+                    select new CarDetailDto { Id = p.Id, CarName = p.CarName, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, ModelYear = p.ModelYear, Description = p.Description, Findex = p.Findex };
                 return result.ToList();
             }
         }
@@ -52,7 +52,7 @@ namespace DataAccess.Concrete.EntityFramework
                     join b in context.Brands
                         on p.BrandId equals b.BrandId
                     where p.ColorId == id
-                    select new CarDetailDto { Id = p.Id, CarName = p.CarName, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, ModelYear = p.ModelYear, Description = p.Description };
+                    select new CarDetailDto { Id = p.Id, CarName = p.CarName, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, ModelYear = p.ModelYear, Description = p.Description, Findex = p.Findex };
                 return result.ToList();
             }
         }
@@ -67,8 +67,8 @@ namespace DataAccess.Concrete.EntityFramework
                     join b in context.Brands
                         on p.BrandId equals b.BrandId
                     where p.Id == id
-                    select new CarDetailDto { Id = p.Id, CarName = p.CarName, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, ModelYear = p.ModelYear, Description = p.Description };
-                return result.First();
+                    select new CarDetailDto { Id = p.Id, CarName = p.CarName, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, ModelYear = p.ModelYear, Description = p.Description, Findex = p.Findex };
+                return result.FirstOrDefault();
             }
         }
 
@@ -82,7 +82,7 @@ namespace DataAccess.Concrete.EntityFramework
                     join b in context.Brands
                         on p.BrandId equals b.BrandId
                     where p.ColorId == colorId && p.BrandId==brandId
-                    select new CarDetailDto { Id = p.Id, CarName = p.CarName, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, ModelYear = p.ModelYear, Description = p.Description };
+                    select new CarDetailDto { Id = p.Id, CarName = p.CarName, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, ModelYear = p.ModelYear, Description = p.Description,Findex= p.Findex };
                 return result.ToList();
             }
         }

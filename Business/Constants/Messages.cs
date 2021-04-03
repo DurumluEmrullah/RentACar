@@ -39,5 +39,9 @@ namespace Business.Constants
         public static string AccessTokenCreated = "Token oluşturuldu ";
         public static string AlreadyRented = "Bu Araç Zaten kiralanmıştır";
         public static string InsufficientBalance = "Yetersiz Bakiye";
+
+        public static string UserUpdated = "Kullanıcı Bilgileri Güncellenmiştir";
+        public static string NotEnoughFindex="Findex puanınız bu aracı almaya yetmemektedir..";
+        public static string CreatedRental ="Kiralama işlemi başarılı";
     }
 }

@@ -46,5 +46,20 @@ namespace WepAPI.Controllers
             }
             return BadRequest(result.Message);
         }
+
+        [HttpGet("getcreditcardbycustomerid")]
+        public IActionResult GetCreditCardByCustomerId(int id)
+        {
+            var result = _creditCardService.GetCreditCardsByCustomerId(id);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.Message);
+        }
+
+   
     }
 }

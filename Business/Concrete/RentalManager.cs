@@ -5,6 +5,7 @@ using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -16,10 +17,12 @@ namespace Business.Concrete
     public class RentalManager : IRentalService
     {
         private IRentalDal _rentalDal;
+        private ICustomerDal _customerDal;
 
-        public RentalManager(IRentalDal rentalDal)
+        public RentalManager(IRentalDal rentalDal,ICustomerDal customerDal)
         {
             _rentalDal = rentalDal;
+            _customerDal = customerDal;
         }
 
         public IDataResult<List<Rental>> GetAll()
@@ -32,21 +35,16 @@ namespace Business.Concrete
         public IResult Add(Rental rental)
         {
 
-            var carState = _rentalDal.Get(c => c.CarId == rental.CarId);
-            if (carState == null)
-            {
-               
-                    if (DateTime.Compare(rental.ReturnDate, rental.RentDate) > 0)
-                    {
-                        rental.RentDate = DateTime.Now;
-                        _rentalDal.Add(rental);
-                        return new SuccessResult();
-                    }
+            IResult result = BusinessRules.Run(FindexQuery(rental),CarStateContolller(rental));
 
-             
+            if(result != null)
+            {
+                return result;
             }
 
-            return new ErrorResult(Messages.AlreadyRented);
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.CreatedRental);
+            
 
         }
 
@@ -66,6 +64,37 @@ namespace Business.Concrete
         public IDataResult<List<RentalDetailDto>> GetDetailRentals()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
+        }
+
+        private IResult FindexQuery(Rental rental)
+        {
+            int carFindex = rental.Findex;
+            var customer = _customerDal.Get(c => c.CustomerId == rental.CustomerId);
+
+            if (carFindex <= customer.Findex)
+            {
+                return new SuccessResult();
+            }
+
+            return new ErrorResult(Messages.NotEnoughFindex);
+        }
+
+        private IResult CarStateContolller(Rental rental)
+        {
+            var carState = _rentalDal.Get(c => c.CarId == rental.CarId);
+            if (carState == null)
+            {
+
+                if (DateTime.Compare(rental.ReturnDate, rental.RentDate) > 0)
+                {
+                    rental.RentDate = DateTime.Now;
+
+                    return new SuccessResult();
+                }
+
+
+            }
+            return new ErrorResult(Messages.AlreadyRented);
         }
     }
 }

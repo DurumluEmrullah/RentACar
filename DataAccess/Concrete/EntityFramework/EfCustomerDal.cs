@@ -25,6 +25,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  LastName = u.LastName,
                                  CompanyName = c.CompanyName,
                                  Email = u.Email,
+                                 Findex=c.Findex,
                                  Password = u.PasswordHash.ToString()
                              };
                 return result.ToList();
@@ -32,5 +33,6 @@ namespace DataAccess.Concrete.EntityFramework
 
         }
 
+     
     }
 }

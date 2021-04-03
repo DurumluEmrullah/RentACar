@@ -10,6 +10,7 @@ using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -36,6 +37,24 @@ namespace Business.Concrete
         public IDataResult<User> GetByEmail(string email)
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
+
+        public IDataResult<UserDto> GetUserByEmail(string email)
+        {
+            var result = _userDal.GetUserByEmail(email);
+            if (result != null)
+            {
+               return new SuccessDataResult<UserDto>(result);
+            }
+
+           return new ErrorDataResult<UserDto>("Böyle bir kullanıcı bulunamadı");
+        }
+
+        public IResult Update(User user)
+        {
+            _userDal.Update(user);
+            return new SuccessResult();
+
         }
 
 
